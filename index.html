@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <script>
     tailwind.config = {
@@ -665,7 +663,7 @@
                 <span>주일예배 모음</span>
                 <span>연속재생</span>
               </div>
-              <h3 class="font-bold text-[#3d2517] text-base group-hover:text-[#b46d43] transition line-clamp-1">주일 강단 말씀 전체보기</h3>
+              <h3 id="sermon-playlist-title" class="font-bold text-[#3d2517] text-base group-hover:text-[#b46d43] transition line-clamp-1">주일 강단 말씀 전체보기</h3>
               <p class="text-xs text-[#8e7561] mt-1">유튜브 주일설교 재생목록 바로가기</p>
             </div>
           </div>
@@ -1146,7 +1144,7 @@
       });
 
       if (sectionId === 'sermons') renderYouTubeData();
-      if (sectionId === 'gallery') loadCMSGallery();
+      if (sectionId === 'gallery') renderFilteredGallery();
     }
 
     function toggleMobileMenu() {
@@ -1223,6 +1221,7 @@
 
     let currentSelectedCategory = '전체';
 
+    // GitHub content/gallery 비동기 파싱 (여러 장 photos 및 단일 image 모두 완벽 지원)
     async function loadCMSGallery() {
       try {
         const response = await fetch('https://api.github.com/repos/createno1234/clayjars-church/contents/content/gallery');
@@ -1234,28 +1233,48 @@
         const loaded = [];
 
         for (const file of files) {
-          if (file.name.endsWith('.md')) {
+          if (file.name && file.name.endsWith('.md')) {
             const raw = await (await fetch(file.download_url)).text();
             
             const titleMatch = raw.match(/title:\s*["']?(.*?)["']?$/m);
             const catMatch = raw.match(/category:\s*["']?(.*?)["']?$/m);
             const dateMatch = raw.match(/date:\s*["']?(.*?)["']?$/m);
-            const imgMatch = raw.match(/image:\s*["']?(.*?)["']?$/m);
             const descMatch = raw.match(/description:\s*["']?(.*?)["']?$/m);
 
-            if (imgMatch && imgMatch[1]) {
-              loaded.push({
-                title: titleMatch ? titleMatch[1] : '교회 앨범',
-                category: catMatch ? catMatch[1] : '수련회/리트릿',
-                date: dateMatch ? dateMatch[1] : '',
-                file: imgMatch[1].replace(/^\/?/, ''),
-                desc: descMatch ? descMatch[1] : ''
-              });
+            const title = titleMatch ? titleMatch[1].trim() : '교회 앨범';
+            const category = catMatch ? catMatch[1].trim() : '행사/친교';
+            const date = dateMatch ? dateMatch[1].trim() : '';
+            const desc = descMatch ? descMatch[1].trim() : '';
+
+            // 1. 복수 사진 리스트 파싱 (photos)
+            const photoMatches = [...raw.matchAll(/-\s*["']?(.*?\.(?:jpg|jpeg|png|webp|gif|JPG|PNG|JPEG))["']?/gi)];
+            // 2. 단일 사진 파싱 (image)
+            const singleImgMatch = raw.match(/image:\s*["']?(.*?)["']?$/m);
+
+            const foundImages = [];
+            if (photoMatches.length > 0) {
+              photoMatches.forEach(m => foundImages.push(m[1].trim()));
+            } else if (singleImgMatch && singleImgMatch[1]) {
+              foundImages.push(singleImgMatch[1].trim());
             }
+
+            // 개별 사진마다 카드로 생성 (경로 정규화)
+            foundImages.forEach(img => {
+              const cleanImg = img.replace(/^\/?(gallery\/)?/, '');
+              loaded.push({
+                title,
+                category,
+                date,
+                file: 'gallery/' + cleanImg,
+                desc
+              });
+            });
           }
         }
 
         if (loaded.length > 0) {
+          // 최신순 정렬 후 기본 예시 앞에 배치
+          loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
           allGalleryAlbums = [...loaded, ...allGalleryAlbums];
         }
         renderFilteredGallery();
@@ -1283,9 +1302,9 @@
       if (!grid) return;
       grid.innerHTML = '';
 
-      const items = currentSelectedCategory === '전체' 
+      const items = (currentSelectedCategory === '전체')
         ? allGalleryAlbums 
-        : allGalleryAlbums.filter(item => item.category === currentSelectedCategory);
+        : allGalleryAlbums.filter(item => (item.category || '').trim() === currentSelectedCategory.trim());
 
       if (items.length === 0) {
         grid.innerHTML = `<div class="col-span-full py-16 text-center text-[#8e7561] text-sm">해당 카테고리에 등록된 사진이 없습니다.</div>`;
@@ -1299,7 +1318,13 @@
 
         card.innerHTML = `
           <div class="relative aspect-video sm:aspect-[4/3] bg-[#2e1b10] overflow-hidden">
-            <img src="${album.file}" alt="${album.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='hero-bg.jpg';">
+            <img 
+              src="${album.file}" 
+              alt="${album.title}" 
+              loading="lazy"
+              class="w-full h-full object-cover transition duration-500 group-hover:scale-105" 
+              onerror="this.onerror=null; this.src='hero-bg.jpg';"
+            >
             <span class="absolute top-3 left-3 bg-[#69472c]/90 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm shadow">${album.category}</span>
           </div>
           <div class="p-5 flex flex-col justify-between flex-1">
@@ -1557,16 +1582,6 @@ ${message}
       } catch (err) {
         console.log("유튜브 데이터 로딩 실패");
       }
-    }
-
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
