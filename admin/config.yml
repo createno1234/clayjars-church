@@ -14,7 +14,13 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: "사진 제목", name: "title", widget: "string" }
-      - { label: "촬영 날짜", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
-      - { label: "사진 파일", name: "image", widget: "image" }
-      - { label: "간단한 설명", name: "description", widget: "text", required: false }
+      - { label: "앨범 제목", name: "title", widget: "string" }
+      - { label: "촬영 일자", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - label: "사진 목록 (여러 장 추가)"
+        name: "photos"
+        widget: "list"
+        summary: "{{fields.image}}"
+        fields:
+          - { label: "사진 파일", name: "image", widget: "image" }
+          - { label: "사진별 설명 (선택)", name: "caption", widget: "string", required: false }
+      - { label: "전체 행사 설명", name: "description", widget: "text", required: false }
