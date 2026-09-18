@@ -21,8 +21,8 @@ collections:
       - label: "카테고리 분류"
         name: "category"
         widget: "select"
-        options: ["수련회/리트릿", "주일예배", "행사/친교", "빚음부(교회학교)"]
-        default: "행사/친교"
+        options: ["행사/친교", "주일예배", "선교", "빚음부(교회학교)"]
+        default: "선교"
       - { label: "촬영 일자", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
       - label: "앨범 사진 등록 (여러 장 추가)"
         name: "photos"
