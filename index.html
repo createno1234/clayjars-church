@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <script>
     tailwind.config = {
@@ -296,54 +294,8 @@
         </div>
       </div>
 
-      <!-- SUNDAY MESSAGE SECTION -->
-      <section class="py-12 bg-[#f4ebd9]/60 border-y border-[#ebdcc5]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex items-center justify-between mb-8">
-            <div>
-              <span class="text-xs font-bold tracking-widest text-[#b46d43] uppercase">SUNDAY MESSAGE</span>
-              <h2 class="text-2xl sm:text-3xl font-bold text-[#3d2517] mt-1">주일 강단 말씀</h2>
-            </div>
-            <a href="https://www.youtube.com/playlist?list=PLpBbc-kk5m0eSUESeTxXsbRHN7emE4sxP" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[#b46d43] hover:text-[#945431] flex items-center gap-1 transition">
-              <span>설교 영상 전체보기</span>
-              <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div class="lg:col-span-7">
-              <a id="main-sermon-link" href="https://www.youtube.com/@질그릇교회-s2c" target="_blank" rel="noopener noreferrer" class="relative group rounded-3xl overflow-hidden shadow-sm bg-[#2e1b10] block cursor-pointer">
-                <div id="main-sermon-thumb" class="aspect-video w-full bg-cover bg-center transition duration-500 group-hover:scale-105 opacity-90" style="background-image: url('https://img.youtube.com/vi/3HqSsdtUI_s/maxresdefault.jpg');"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-between p-6 sm:p-8">
-                  <div class="flex justify-between items-start">
-                    <span class="px-3.5 py-1 rounded-full bg-[#b46d43] text-white text-xs font-bold tracking-wide shadow">최신 주일예배</span>
-                    <span class="bg-black/50 backdrop-blur-sm text-[#f4ebd9] text-xs px-3 py-1 rounded-full border border-white/10 font-medium flex items-center gap-1.5">
-                      <i class="fab fa-youtube text-red-500"></i> 유튜브에서 시청
-                    </span>
-                  </div>
-                  <div>
-                    <div class="w-14 h-14 rounded-full bg-[#b46d43]/95 text-white flex items-center justify-center text-xl pl-1 shadow-xl mb-4 group-hover:scale-110 transition duration-300">
-                      <i class="fas fa-play"></i>
-                    </div>
-                    <h3 id="main-sermon-title" class="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug drop-shadow">최신 주일예배 설교를 불러오는 중...</h3>
-                    <p id="main-sermon-date" class="text-xs sm:text-sm text-[#f5ecde]">질그릇 교회 주일예배</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="lg:col-span-5 space-y-4">
-              <h3 class="font-bold text-[#3d2517] text-lg border-b border-[#ebdcc5] pb-3">최근 주별 설교 모음</h3>
-              <div id="side-sermon-list" class="space-y-3">
-                <p class="text-xs text-[#8e7561] py-4 text-center">유튜브 설교 목록을 가져오는 중입니다...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- CALL TO ACTION BANNER -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6">
         <div class="bg-gradient-to-r from-[#1e3a5f] to-[#2d527c] rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 border border-[#416792]/40">
           <div class="space-y-2 text-center md:text-left">
             <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">기도제목을 나누어 주세요</h3>
@@ -619,7 +571,7 @@
       </div>
     </section>
 
-    <!-- ==================== SECTION: SERMONS (설교 탭) ==================== -->
+    <!-- ==================== SECTION: SERMONS (설교 탭 수정됨) ==================== -->
     <section id="section-sermons" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       <div class="text-center max-w-3xl mx-auto space-y-3">
         <span class="text-[#b46d43] font-bold text-sm tracking-wider uppercase">Sermons & Media</span>
@@ -627,84 +579,28 @@
         <p class="text-[#6c5d53]">선포되는 하나님의 말씀을 통해 영적 힘과 위로를 얻으시기 바랍니다.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a id="sermon-tab-latest-link" href="https://www.youtube.com/@질그릇교회-s2c" target="_blank" rel="noopener noreferrer" class="sermon-card bg-white rounded-3xl border border-[#ebdcc5] overflow-hidden shadow-sm hover:shadow-md transition group flex flex-col justify-between block">
-          <div>
-            <div class="relative aspect-video bg-[#2e1b10] overflow-hidden">
-              <div id="sermon-tab-latest-thumb" class="w-full h-full bg-cover bg-center group-hover:scale-105 transition duration-300" style="background-image: url('https://img.youtube.com/vi/3HqSsdtUI_s/hqdefault.jpg');"></div>
-              <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-[#b46d43]/90 text-white flex items-center justify-center text-lg pl-0.5 shadow-lg group-hover:scale-110 transition"><i class="fas fa-play"></i></div>
-              </div>
-              <span class="absolute top-2 left-2 bg-[#b46d43] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">최신설교</span>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center justify-between text-xs text-[#b46d43] font-semibold mb-2">
-                <span>주일예배</span>
-                <span id="sermon-tab-latest-date">최신</span>
-              </div>
-              <h3 id="sermon-tab-latest-title" class="font-bold text-[#3d2517] text-base group-hover:text-[#b46d43] transition line-clamp-1">설교 영상을 불러오는 중...</h3>
-              <p class="text-xs text-[#8e7561] mt-1">질그릇 교회 주일예배</p>
-            </div>
-          </div>
-          <div class="px-5 pb-5 pt-3 border-t border-[#f5ecde] flex items-center justify-between text-xs text-[#8e7561]">
-            <span>질그릇 교회 설교</span>
-            <span class="text-[#b46d43] font-semibold group-hover:underline flex items-center gap-1">
-              <i class="fab fa-youtube text-red-600"></i> 유튜브에서 보기
-            </span>
-          </div>
-        </a>
-
-        <a href="https://www.youtube.com/playlist?list=PLpBbc-kk5m0eSUESeTxXsbRHN7emE4sxP" target="_blank" rel="noopener noreferrer" class="sermon-card bg-white rounded-3xl border border-[#ebdcc5] overflow-hidden shadow-sm hover:shadow-md transition group flex flex-col justify-between block">
-          <div>
-            <div class="relative aspect-video bg-[#69472c] overflow-hidden flex items-center justify-center">
-              <i class="fab fa-youtube text-5xl text-[#ebdcc5] group-hover:scale-110 transition"></i>
-              <div class="absolute bottom-2 right-2 bg-black/70 text-[#f4ebd9] text-[10px] px-2 py-0.5 rounded">재생목록</div>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center justify-between text-xs text-[#b46d43] font-semibold mb-2">
-                <span>주일예배 모음</span>
-                <span>연속재생</span>
-              </div>
-              <h3 id="sermon-playlist-title" class="font-bold text-[#3d2517] text-base group-hover:text-[#b46d43] transition line-clamp-1">주일 강단 말씀 전체보기</h3>
-              <p class="text-xs text-[#8e7561] mt-1">유튜브 주일설교 재생목록 바로가기</p>
-            </div>
-          </div>
-          <div class="px-5 pb-5 pt-3 border-t border-[#f5ecde] flex items-center justify-between text-xs text-[#8e7561]">
-            <span>질그릇 교회</span>
-            <span class="text-[#b46d43] font-semibold group-hover:underline flex items-center gap-1">
-              <i class="fab fa-youtube text-red-600"></i> 전체 재생
-            </span>
-          </div>
-        </a>
-
-        <a href="https://www.youtube.com/@질그릇교회-s2c" target="_blank" rel="noopener noreferrer" class="sermon-card bg-white rounded-3xl border border-[#ebdcc5] overflow-hidden shadow-sm hover:shadow-md transition group flex flex-col justify-between block">
-          <div>
-            <div class="relative aspect-video bg-[#2e1b10] overflow-hidden flex items-center justify-center">
-              <div class="text-center">
-                <i class="fab fa-youtube text-[#ebdcc5] text-5xl mb-2 group-hover:scale-110 transition inline-block"></i>
-                <p class="text-[#fdfbf7] text-xs font-bold">공식 유튜브 채널</p>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center justify-between text-xs text-[#b46d43] font-semibold mb-2">
-                <span>공식 채널</span>
-                <span>구독 & 알림</span>
-              </div>
-              <h3 class="font-bold text-[#3d2517] text-base group-hover:text-[#b46d43] transition line-clamp-1">질그릇 교회 유튜브 채널</h3>
-              <p class="text-xs text-[#8e7561] mt-1">@질그릇교회-s2c | 모든 영상 시청</p>
-            </div>
-          </div>
-          <div class="px-5 pb-5 pt-3 border-t border-[#f5ecde] flex items-center justify-between text-xs text-[#8e7561]">
-            <span>유튜브 바로가기</span>
-            <span class="text-[#b46d43] font-semibold group-hover:underline flex items-center gap-1">
-              채널 방문 <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
-            </span>
-          </div>
-        </a>
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="relative w-full aspect-video rounded-3xl overflow-hidden border border-[#ebdcc5] shadow-lg bg-black">
+          <!-- 유튜브 채널의 모든 업로드 영상을 최신순으로 완벽하게 자동 연동하는 공식 iframe -->
+          <iframe 
+            class="w-full h-full"
+            src="https://www.youtube.com/embed?listType=playlist&list=UUauYOH0c-2VcZbHk6EJqYMQ" 
+            title="질그릇 교회 주일 설교" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        
+        <div class="text-center">
+          <a href="https://www.youtube.com/@질그릇교회-s2c" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-[#b46d43] hover:text-[#945431] transition px-6 py-3 bg-white rounded-full border border-[#ebdcc5] shadow-sm">
+            <i class="fab fa-youtube text-red-600 text-lg"></i> 질그릇 교회 유튜브 채널 바로가기 &rarr;
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- ==================== SECTION: GALLERY (카테고리 앨범 탭) ==================== -->
+    <!-- ==================== SECTION: GALLERY (카테고리 앨범 탭 수정됨) ==================== -->
     <section id="section-gallery" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       <div class="text-center max-w-3xl mx-auto space-y-3">
         <span class="text-[#b46d43] font-bold text-sm tracking-wider uppercase">Church Photo Gallery</span>
@@ -1145,7 +1041,6 @@
         }
       });
 
-      if (sectionId === 'sermons') renderYouTubeData();
       if (sectionId === 'gallery') renderFilteredGallery();
     }
 
@@ -1223,7 +1118,7 @@
 
     let currentSelectedCategory = '전체';
 
-    // GitHub content/gallery 비동기 파싱 (모든 형식의 사진 경로 완벽 추출)
+    // GitHub content/gallery 비동기 파싱 (캐시 우회 & 원본 절대경로 & 강력한 정규식 적용)
     async function loadCMSGallery() {
       try {
         const apiUrl = 'https://api.github.com/repos/createno1234/clayjars-church/contents/content/gallery?t=' + Date.now();
@@ -1249,30 +1144,28 @@
             const date = dateMatch ? dateMatch[1].trim() : '';
             const desc = descMatch ? descMatch[1].trim() : '';
 
-            // 마크다운 내 이미지 확장자를 가진 모든 문자열 강력 추출 (단일, 복수 모두 대응)
-            const imageRegex = /([a-zA-Z0-9_\-\/가-힣\s]+\.(?:jpg|jpeg|png|webp|gif|JPG|JPEG|PNG|WEBP))/gi;
-            const allMatches = [...raw.matchAll(imageRegex)];
+            // 마크다운에서 이미지 확장자(.jpg, .png 등)를 가진 파일명 완벽하게 추출 (다중 등록 지원)
+            const imageRegex = /([a-zA-Z0-9_.\-\/가-힣]+\.(?:jpg|jpeg|png|webp|gif|JPG|JPEG|PNG|WEBP))/gi;
+            const matches = [...raw.matchAll(imageRegex)];
 
             const foundImages = [];
-            allMatches.forEach(m => {
-              let imgPath = m[1].trim().replace(/^['"]|['"]$/g, '');
-              if (imgPath && !imgPath.includes('\n')) {
-                if (imgPath.includes(':')) {
-                  imgPath = imgPath.split(':').pop().trim();
-                }
-                if (!foundImages.includes(imgPath)) {
-                  foundImages.push(imgPath);
-                }
+            matches.forEach(m => {
+              let imgPath = m[1];
+              // 경로에 붙어있는 gallery/ 등을 잘라내고 순수 파일명만 추출
+              let cleanFileName = imgPath.split('/').pop().trim();
+              if (cleanFileName && !foundImages.includes(cleanFileName)) {
+                foundImages.push(cleanFileName);
               }
             });
 
-            foundImages.forEach(img => {
-              let cleanImg = img.replace(/^\/?(gallery\/)?/, '');
+            foundImages.forEach(fileName => {
+              // GitHub 저장소 원본 절대 경로로 연결하여 경로 깨짐 100% 방지
+              let absoluteUrl = `https://raw.githubusercontent.com/createno1234/clayjars-church/main/gallery/${fileName}`;
               loaded.push({
                 title,
                 category,
                 date,
-                file: 'gallery/' + cleanImg,
+                file: absoluteUrl,
                 desc
               });
             });
@@ -1280,12 +1173,13 @@
         }
 
         if (loaded.length > 0) {
+          // 날짜 기준 최신순 정렬 후 기본 사진들을 덮어씀
           loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-          allGalleryAlbums = loaded; // 관리자에서 올린 사진으로 화면을 채움
+          allGalleryAlbums = loaded;
         }
         renderFilteredGallery();
       } catch (err) {
-        console.error("갤러리 파싱 오류:", err);
+        console.error("갤러리 로딩 중단:", err);
         renderFilteredGallery();
       }
     }
@@ -1519,78 +1413,6 @@ ${message}
       }, 3500);
     }
 
-    let cachedYouTubeItems = null;
-
-    function renderYouTubeData() {
-      if (!cachedYouTubeItems || cachedYouTubeItems.length === 0) return;
-      const latest = cachedYouTubeItems[0];
-      const latestId = latest.guid.split(':')[2] || latest.link.split('v=')[1];
-      const latestDate = latest.pubDate ? latest.pubDate.split(' ')[0].replace(/-/g, '.') : '';
-
-      const mainLink = document.getElementById('main-sermon-link');
-      const mainThumb = document.getElementById('main-sermon-thumb');
-      const mainTitle = document.getElementById('main-sermon-title');
-      const mainDate = document.getElementById('main-sermon-date');
-
-      if (mainLink) mainLink.href = `https://www.youtube.com/watch?v=${latestId}`;
-      if (mainThumb) mainThumb.style.backgroundImage = `url('https://img.youtube.com/vi/${latestId}/hqdefault.jpg')`;
-      if (mainTitle) mainTitle.innerText = latest.title;
-      if (mainDate) mainDate.innerText = `${latestDate} 주일예배 | 질그릇 교회`;
-
-      const sideList = document.getElementById('side-sermon-list');
-      if (sideList) {
-        sideList.innerHTML = "";
-        cachedYouTubeItems.slice(0, 3).forEach((item, idx) => {
-          const vId = item.guid.split(':')[2] || item.link.split('v=')[1];
-          const pDate = item.pubDate ? item.pubDate.split(' ')[0].replace(/-/g, '.') : '';
-          const itemEl = document.createElement('a');
-          itemEl.href = `https://www.youtube.com/watch?v=${vId}`;
-          itemEl.target = "_blank";
-          itemEl.rel = "noopener noreferrer";
-          itemEl.className = "p-3.5 rounded-2xl hover:bg-white bg-white/80 border border-[#ebdcc5] shadow-sm transition cursor-pointer flex gap-3.5 items-center group block";
-          itemEl.innerHTML = `
-            <div class="w-24 h-16 rounded-xl bg-[#2e1b10] flex-shrink-0 relative overflow-hidden">
-              <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition" style="background-image: url('https://img.youtube.com/vi/${vId}/mqdefault.jpg');"></div>
-              <div class="absolute inset-0 bg-black/25 flex items-center justify-center text-white text-xs"><i class="fas fa-play"></i></div>
-            </div>
-            <div class="min-w-0 flex-1">
-              <p class="text-[11px] text-[#b46d43] font-semibold">${idx === 0 ? '최신 주일설교' : pDate + ' 설교'}</p>
-              <h4 class="font-bold text-xs sm:text-sm text-[#3d2517] line-clamp-1 group-hover:text-[#b46d43] transition">${item.title}</h4>
-              <p class="text-[11px] text-[#8e7561] mt-0.5">질그릇 교회</p>
-            </div>
-          `;
-          sideList.appendChild(itemEl);
-        });
-      }
-
-      const tabLink = document.getElementById('sermon-tab-latest-link');
-      const tabThumb = document.getElementById('sermon-tab-latest-thumb');
-      const tabTitle = document.getElementById('sermon-tab-latest-title');
-      const tabDate = document.getElementById('sermon-tab-latest-date');
-
-      if (tabLink) tabLink.href = `https://www.youtube.com/watch?v=${latestId}`;
-      if (tabThumb) tabThumb.style.backgroundImage = `url('https://img.youtube.com/vi/${latestId}/hqdefault.jpg')`;
-      if (tabTitle) tabTitle.innerText = latest.title;
-      if (tabDate) tabDate.innerText = latestDate;
-    }
-
-    async function syncLatestYouTube() {
-      const channelId = "UCauYOH0c-2VcZbHk6EJqYMQ";
-      const feedUrl = encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        if (data.status === 'ok' && data.items && data.items.length > 0) {
-          cachedYouTubeItems = data.items;
-          renderYouTubeData();
-        }
-      } catch (err) {
-        console.log("유튜브 데이터 로딩 실패");
-      }
-    }
-
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
@@ -1602,7 +1424,6 @@ ${message}
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      syncLatestYouTube();
       loadCMSGallery();
     });
   </script>
