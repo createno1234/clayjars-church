@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- Netlify Identity Widget (관리자 로그인 인증용) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <script>
     tailwind.config = {
@@ -92,6 +94,7 @@
           <button onclick="showSection('about')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="about">교회소개</button>
           <button onclick="showSection('worship')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="worship">예배 및 모임</button>
           <button onclick="showSection('sermons')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="sermons">설교</button>
+          <button onclick="showSection('gallery')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="gallery">교회 앨범</button>
           <button onclick="showSection('newcomer')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="newcomer">새가족안내</button>
           <button onclick="showSection('community')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="community">교회소식</button>
           <button onclick="showSection('location')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="location">오시는 길</button>
@@ -117,6 +120,7 @@
       <button onclick="showSection('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">교회소개</button>
       <button onclick="showSection('worship'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">예배 및 모임 안내</button>
       <button onclick="showSection('sermons'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">설교 영상</button>
+      <button onclick="showSection('gallery'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">교회 앨범</button>
       <button onclick="showSection('newcomer'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">새가족 안내</button>
       <button onclick="showSection('community'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">교회소식</button>
       <button onclick="showSection('location'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">오시는 길 & 주차안내</button>
@@ -173,7 +177,7 @@
         </div>
       </div>
 
-      <!-- ==================== ELEVATION STYLE LARGE PEEK CAROUSEL (화면을 꽉 채우는 대형 카드 슬라이더) ==================== -->
+      <!-- ==================== ELEVATION STYLE LARGE PEEK CAROUSEL ==================== -->
       <section class="py-6 overflow-hidden -mt-14 relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="relative">
@@ -304,7 +308,7 @@
         </div>
       </div>
 
-      <!-- SUNDAY MESSAGE SECTION (홈 화면 실시간 설교 연동) -->
+      <!-- SUNDAY MESSAGE SECTION (실시간 설교 연동) -->
       <section class="py-12 bg-[#f4ebd9]/60 border-y border-[#ebdcc5]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between mb-8">
@@ -444,7 +448,7 @@
             </div>
           </div>
 
-          <!-- 현성원 동역목사 (동역목사로 표기 수정) -->
+          <!-- 현성원 동역목사 -->
           <div class="bg-white rounded-3xl border border-[#ebdcc5] overflow-hidden shadow-sm hover:shadow-md transition text-center flex flex-col">
             <div class="aspect-[4/5] bg-[#faf6f0] relative overflow-hidden">
               <img src="pastor-sub.jpg" alt="현성원 동역목사" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80';">
@@ -676,7 +680,7 @@
       </div>
     </section>
 
-    <!-- ==================== SECTION: SERMONS (설교 탭: 자동 연동 적용) ==================== -->
+    <!-- ==================== SECTION: SERMONS (설교 탭) ==================== -->
     <section id="section-sermons" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       <div class="text-center max-w-3xl mx-auto space-y-3">
         <span class="text-[#b46d43] font-bold text-sm tracking-wider uppercase">Sermons & Media</span>
@@ -761,6 +765,20 @@
             </span>
           </div>
         </a>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: GALLERY (교회 앨범 탭) ==================== -->
+    <section id="section-gallery" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <span class="text-[#b46d43] font-bold text-sm tracking-wider uppercase">Church Photo Gallery</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#3d2517]">교회 앨범</h2>
+        <p class="text-[#6c5d53]">질그릇 교회의 따뜻한 예배와 은혜로운 교제의 순간들을 나눕니다.</p>
+      </div>
+
+      <!-- 바둑판 그리드 컨테이너 -->
+      <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- 자바스크립트가 사진 목록을 읽어 여기에 카드를 자동 생성합니다 -->
       </div>
     </section>
 
@@ -971,6 +989,7 @@
             <li><a href="#about" onclick="showSection('about')" class="hover:text-white transition">교회소개 & 담임목사 인사</a></li>
             <li><a href="#worship" onclick="showSection('worship')" class="hover:text-white transition">예배 및 모임 안내</a></li>
             <li><a href="#sermons" onclick="showSection('sermons')" class="hover:text-white transition">말씀 영상</a></li>
+            <li><a href="#gallery" onclick="showSection('gallery')" class="hover:text-white transition">교회 앨범</a></li>
             <li><a href="#newcomer" onclick="showSection('newcomer')" class="hover:text-white transition">새가족 등록 안내</a></li>
             <li><a href="#community" onclick="showSection('community')" class="hover:text-white transition">교회소식</a></li>
             <li><a href="#location" onclick="showSection('location')" class="hover:text-white transition">오시는 길 & 주차안내</a></li>
@@ -1004,6 +1023,19 @@
   </footer>
 
   <!-- ==================== MODALS ==================== -->
+  
+  <!-- 갤러리 확대 팝업 (라이트박스 모달) -->
+  <div id="gallery-lightbox" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeLightbox()">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition text-xl" aria-label="닫기">
+      <i class="fas fa-xmark"></i>
+    </button>
+    <div class="max-w-4xl max-h-[85vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="확대 사진" class="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border border-white/10">
+      <p id="lightbox-title" class="text-white text-base sm:text-lg font-bold mt-4 tracking-wide text-center"></p>
+    </div>
+  </div>
+
+  <!-- 새가족 등록 모달 -->
   <div id="register-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl border border-[#ebdcc5] max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
       <div class="p-6 bg-[#69472c] text-white flex justify-between items-center">
@@ -1069,6 +1101,7 @@
     </div>
   </div>
 
+  <!-- 중보기도 요청 모달 -->
   <div id="prayer-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl border border-[#ebdcc5] animate-in fade-in zoom-in-95 duration-200">
       <div class="p-6 bg-[#69472c] text-white flex justify-between items-center">
@@ -1106,6 +1139,7 @@
     </div>
   </div>
 
+  <!-- 헌금 계좌 모달 -->
   <div id="giving-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl border border-[#ebdcc5] animate-in fade-in zoom-in-95 duration-200">
       <div class="p-6 bg-[#69472c] text-white flex justify-between items-center">
@@ -1137,6 +1171,7 @@
     </div>
   </div>
 
+  <!-- 토스트 알림창 -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-[#69472c] text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm border border-[#b46d43]/30">
     <i id="toast-icon" class="fas fa-check-circle text-[#ebdcc5]"></i>
     <span id="toast-message">알림 메시지</span>
@@ -1144,7 +1179,7 @@
 
   <!-- ==================== JAVASCRIPT LOGIC ==================== -->
   <script>
-    const sections = ['home', 'about', 'worship', 'sermons', 'newcomer', 'community', 'location'];
+    const sections = ['home', 'about', 'worship', 'sermons', 'gallery', 'newcomer', 'community', 'location'];
 
     // 상단 네비게이션 탭 전환 함수
     function showSection(sectionId) {
@@ -1171,6 +1206,9 @@
 
       if (sectionId === 'sermons') {
         renderYouTubeData();
+      }
+      if (sectionId === 'gallery') {
+        renderGallery();
       }
     }
 
@@ -1223,6 +1261,51 @@
       carouselEl.addEventListener('scroll', updateCarouselDots);
     }
 
+    // ==================== 갤러리 (교회 앨범) 데이터 및 로직 ====================
+    // 저장소의 기본 사진 및 관리자 페이지(/admin)에서 등록되는 사진 목록
+    const galleryPhotos = [
+      { file: 'event1.jpg', title: '가을 형제자매 에프터 모임' },
+      { file: 'event2.jpg', title: '가을학기 빚음부 성경학교 개강' },
+      { file: 'event3.jpg', title: '주일 오후 전체양육 모임' }
+    ];
+
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      galleryPhotos.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "group relative rounded-3xl overflow-hidden shadow-sm border border-[#ebdcc5] bg-white cursor-pointer aspect-square";
+        card.onclick = () => openLightbox(item.file, item.title);
+
+        card.innerHTML = `
+          <img src="${item.file}" alt="${item.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+            <p class="text-white text-xs sm:text-sm font-bold drop-shadow line-clamp-1">${item.title}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openLightbox(file, title) {
+      const lightbox = document.getElementById('gallery-lightbox');
+      if (!lightbox) return;
+      document.getElementById('lightbox-img').src = file;
+      document.getElementById('lightbox-title').innerText = title;
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('gallery-lightbox');
+      if (!lightbox) return;
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+    }
+
+    // ==================== 모달 및 양식 제출 로직 ====================
     function openRegisterModal() {
       const modal = document.getElementById('register-modal');
       if (modal) {
@@ -1498,7 +1581,21 @@ ${message}
       }
     }
 
-    window.addEventListener('DOMContentLoaded', syncLatestYouTube);
+    // Netlify Identity 로그인 리디렉션 처리
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      syncLatestYouTube();
+      renderGallery();
+    });
   </script>
 </body>
 </html>
