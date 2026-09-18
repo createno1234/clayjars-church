@@ -86,25 +86,26 @@
           </div>
         </a>
 
-        <nav class="hidden lg:flex items-center space-x-1 font-medium text-[#5c4e43]">
-          <button onclick="showSection('home')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors font-bold text-[#b46d43] bg-[#ede1cf]" data-target="home">홈</button>
-          <button onclick="showSection('about')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="about">교회소개</button>
-          <button onclick="showSection('worship')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="worship">예배 및 모임</button>
-          <button onclick="showSection('sermons')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="sermons">설교</button>
-          <button onclick="showSection('gallery')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="gallery">교회 앨범</button>
-          <button onclick="showSection('newcomer')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="newcomer">새가족안내</button>
-          <button onclick="showSection('community')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="community">교회소식</button>
-          <button onclick="showSection('location')" class="nav-btn px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="location">오시는 길</button>
+        <nav class="hidden md:flex items-center space-x-0.5 lg:space-x-1 font-medium text-[#5c4e43] text-[13px] lg:text-base whitespace-nowrap">
+          <button onclick="showSection('home')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors font-bold text-[#b46d43] bg-[#ede1cf]" data-target="home">홈</button>
+          <button onclick="showSection('about')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="about">교회소개</button>
+          <button onclick="showSection('worship')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="worship">예배/모임</button>
+          <button onclick="showSection('sermons')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="sermons">설교</button>
+          <button onclick="showSection('gallery')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="gallery">교회앨범</button>
+          <button onclick="showSection('newcomer')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="newcomer">새가족안내</button>
+          <button onclick="showSection('community')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="community">교회소식</button>
+          <button onclick="showSection('location')" class="nav-btn px-2 lg:px-4 py-2 rounded-xl hover:text-[#b46d43] hover:bg-[#ede1cf] transition-colors" data-target="location">오시는길</button>
         </nav>
 
-        <div class="hidden sm:flex items-center space-x-3">
-          <button onclick="openRegisterModal()" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-[#b46d43] hover:bg-[#945431] text-white shadow-sm transition-all transform active:scale-95 flex items-center gap-2">
+        <div class="hidden sm:flex items-center space-x-3 flex-shrink-0 ml-2">
+          <button onclick="openRegisterModal()" class="px-4 lg:px-5 py-2.5 rounded-full text-sm font-semibold bg-[#b46d43] hover:bg-[#945431] text-white shadow-sm transition-all transform active:scale-95 flex items-center gap-2">
             <i class="fas fa-heart text-[#f5ecde]"></i>
-            <span>새가족 등록</span>
+            <span class="hidden xl:inline">새가족 등록</span>
+            <span class="inline xl:hidden">등록</span>
           </button>
         </div>
 
-        <div class="flex lg:hidden">
+        <div class="flex md:hidden">
           <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl text-[#5c4e43] hover:bg-[#ede1cf] focus:outline-none" aria-label="메뉴 열기">
             <i class="fas fa-bars text-2xl"></i>
           </button>
@@ -112,7 +113,7 @@
       </div>
     </div>
 
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-[#ebdcc5] bg-[#faf6f0] px-4 pt-3 pb-6 space-y-2 shadow-xl">
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#ebdcc5] bg-[#faf6f0] px-4 pt-3 pb-6 space-y-2 shadow-xl">
       <button onclick="showSection('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">홈</button>
       <button onclick="showSection('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">교회소개</button>
       <button onclick="showSection('worship'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-[#3d2517] hover:bg-[#ede1cf]">예배 및 모임 안내</button>
@@ -581,10 +582,10 @@
 
       <div class="max-w-4xl mx-auto space-y-6">
         <div class="relative w-full aspect-video rounded-3xl overflow-hidden border border-[#ebdcc5] shadow-lg bg-black">
-          <!-- 유튜브 채널의 모든 업로드 영상을 최신순으로 완벽하게 자동 연동하는 공식 iframe -->
+          <!-- 재생이 제한된 업로드 목록(UU) 대신 정상적으로 재생 허용된 재생목록(PL)으로 변경 -->
           <iframe 
             class="w-full h-full"
-            src="https://www.youtube.com/embed?listType=playlist&list=UUauYOH0c-2VcZbHk6EJqYMQ" 
+            src="https://www.youtube.com/embed/videoseries?list=PLpBbc-kk5m0eSUESeTxXsbRHN7emE4sxP" 
             title="질그릇 교회 주일 설교" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -1118,7 +1119,6 @@
 
     let currentSelectedCategory = '전체';
 
-    // GitHub content/gallery 비동기 파싱 (캐시 우회 & 원본 절대경로 & 강력한 정규식 적용)
     async function loadCMSGallery() {
       try {
         const apiUrl = 'https://api.github.com/repos/createno1234/clayjars-church/contents/content/gallery?t=' + Date.now();
@@ -1144,14 +1144,12 @@
             const date = dateMatch ? dateMatch[1].trim() : '';
             const desc = descMatch ? descMatch[1].trim() : '';
 
-            // 마크다운에서 이미지 확장자(.jpg, .png 등)를 가진 파일명 완벽하게 추출 (다중 등록 지원)
             const imageRegex = /([a-zA-Z0-9_.\-\/가-힣]+\.(?:jpg|jpeg|png|webp|gif|JPG|JPEG|PNG|WEBP))/gi;
             const matches = [...raw.matchAll(imageRegex)];
 
             const foundImages = [];
             matches.forEach(m => {
               let imgPath = m[1];
-              // 경로에 붙어있는 gallery/ 등을 잘라내고 순수 파일명만 추출
               let cleanFileName = imgPath.split('/').pop().trim();
               if (cleanFileName && !foundImages.includes(cleanFileName)) {
                 foundImages.push(cleanFileName);
@@ -1159,7 +1157,6 @@
             });
 
             foundImages.forEach(fileName => {
-              // GitHub 저장소 원본 절대 경로로 연결하여 경로 깨짐 100% 방지
               let absoluteUrl = `https://raw.githubusercontent.com/createno1234/clayjars-church/main/gallery/${fileName}`;
               loaded.push({
                 title,
@@ -1173,7 +1170,6 @@
         }
 
         if (loaded.length > 0) {
-          // 날짜 기준 최신순 정렬 후 기본 사진들을 덮어씀
           loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
           allGalleryAlbums = loaded;
         }
