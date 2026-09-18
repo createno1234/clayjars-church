@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <script>
     tailwind.config = {
@@ -1224,7 +1226,6 @@
     // GitHub content/gallery 비동기 파싱 (모든 형식의 사진 경로 완벽 추출)
     async function loadCMSGallery() {
       try {
-        // 캐시 방지를 위해 타임스탬프 추가
         const apiUrl = 'https://api.github.com/repos/createno1234/clayjars-church/contents/content/gallery?t=' + Date.now();
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -1238,7 +1239,6 @@
           if (file.name && file.name.endsWith('.md')) {
             const raw = await (await fetch(file.download_url + '?t=' + Date.now())).text();
             
-            // 제목, 카테고리, 날짜, 설명 추출
             const titleMatch = raw.match(/title:\s*["']?(.*?)["']?$/m);
             const catMatch = raw.match(/category:\s*["']?(.*?)["']?$/m);
             const dateMatch = raw.match(/date:\s*["']?(.*?)["']?$/m);
@@ -1249,16 +1249,14 @@
             const date = dateMatch ? dateMatch[1].trim() : '';
             const desc = descMatch ? descMatch[1].trim() : '';
 
-            // 마크다운 본문 전체에서 이미지 확장자(.jpg, .jpeg, .png, .webp, .gif)를 가진 모든 단어를 남김없이 추출
+            // 마크다운 내 이미지 확장자를 가진 모든 문자열 강력 추출 (단일, 복수 모두 대응)
             const imageRegex = /([a-zA-Z0-9_\-\/가-힣\s]+\.(?:jpg|jpeg|png|webp|gif|JPG|JPEG|PNG|WEBP))/gi;
             const allMatches = [...raw.matchAll(imageRegex)];
 
             const foundImages = [];
             allMatches.forEach(m => {
-              let imgPath = m[1].trim().replace(/^['"]|['"]$/g, ''); // 따옴표 제거
-              // metadata 필드명이 아닌 실제 파일명만 필터
+              let imgPath = m[1].trim().replace(/^['"]|['"]$/g, '');
               if (imgPath && !imgPath.includes('\n')) {
-                // "photo: gallery/abc.jpg" 형태에서 순수 경로만 분리
                 if (imgPath.includes(':')) {
                   imgPath = imgPath.split(':').pop().trim();
                 }
@@ -1268,7 +1266,6 @@
               }
             });
 
-            // 개별 사진 카드로 등록
             foundImages.forEach(img => {
               let cleanImg = img.replace(/^\/?(gallery\/)?/, '');
               loaded.push({
@@ -1283,13 +1280,12 @@
         }
 
         if (loaded.length > 0) {
-          // 날짜 기준 최신순 정렬
           loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-          allGalleryAlbums = loaded; // 관리자에서 올린 사진으로 화면 채움
+          allGalleryAlbums = loaded; // 관리자에서 올린 사진으로 화면을 채움
         }
         renderFilteredGallery();
       } catch (err) {
-        console.error("갤러리 파싱 에러:", err);
+        console.error("갤러리 파싱 오류:", err);
         renderFilteredGallery();
       }
     }
@@ -1593,6 +1589,16 @@ ${message}
       } catch (err) {
         console.log("유튜브 데이터 로딩 실패");
       }
+    }
+
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
