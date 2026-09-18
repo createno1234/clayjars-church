@@ -2,6 +2,8 @@ backend:
   name: github
   repo: createno1234/clayjars-church
   branch: main
+  base_url: https://createno1234.github.io
+  auth_endpoint: ""
 
 media_folder: "gallery"
 public_folder: "gallery"
@@ -19,8 +21,8 @@ collections:
       - label: "카테고리 분류"
         name: "category"
         widget: "select"
-        options: ["수련회/리트릿", "주일예배", "선교", "빚음부(교회학교)"]
-        default: "선교"
+        options: ["수련회/리트릿", "주일예배", "행사/친교", "빚음부(교회학교)"]
+        default: "행사/친교"
       - { label: "촬영 일자", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
       - { label: "대표/단일 사진", name: "image", widget: "image" }
       - { label: "간단한 설명", name: "description", widget: "text", required: false }
