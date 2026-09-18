@@ -1221,10 +1221,12 @@
 
     let currentSelectedCategory = '전체';
 
-    // GitHub content/gallery 비동기 파싱 (여러 장 photos 및 단일 image 모두 완벽 지원)
+    // GitHub content/gallery 비동기 파싱 (모든 형식의 사진 경로 완벽 추출)
     async function loadCMSGallery() {
       try {
-        const response = await fetch('https://api.github.com/repos/createno1234/clayjars-church/contents/content/gallery');
+        // 캐시 방지를 위해 타임스탬프 추가
+        const apiUrl = 'https://api.github.com/repos/createno1234/clayjars-church/contents/content/gallery?t=' + Date.now();
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           renderFilteredGallery();
           return;
@@ -1234,8 +1236,9 @@
 
         for (const file of files) {
           if (file.name && file.name.endsWith('.md')) {
-            const raw = await (await fetch(file.download_url)).text();
+            const raw = await (await fetch(file.download_url + '?t=' + Date.now())).text();
             
+            // 제목, 카테고리, 날짜, 설명 추출
             const titleMatch = raw.match(/title:\s*["']?(.*?)["']?$/m);
             const catMatch = raw.match(/category:\s*["']?(.*?)["']?$/m);
             const dateMatch = raw.match(/date:\s*["']?(.*?)["']?$/m);
@@ -1246,21 +1249,28 @@
             const date = dateMatch ? dateMatch[1].trim() : '';
             const desc = descMatch ? descMatch[1].trim() : '';
 
-            // 1. 복수 사진 리스트 파싱 (photos)
-            const photoMatches = [...raw.matchAll(/-\s*["']?(.*?\.(?:jpg|jpeg|png|webp|gif|JPG|PNG|JPEG))["']?/gi)];
-            // 2. 단일 사진 파싱 (image)
-            const singleImgMatch = raw.match(/image:\s*["']?(.*?)["']?$/m);
+            // 마크다운 본문 전체에서 이미지 확장자(.jpg, .jpeg, .png, .webp, .gif)를 가진 모든 단어를 남김없이 추출
+            const imageRegex = /([a-zA-Z0-9_\-\/가-힣\s]+\.(?:jpg|jpeg|png|webp|gif|JPG|JPEG|PNG|WEBP))/gi;
+            const allMatches = [...raw.matchAll(imageRegex)];
 
             const foundImages = [];
-            if (photoMatches.length > 0) {
-              photoMatches.forEach(m => foundImages.push(m[1].trim()));
-            } else if (singleImgMatch && singleImgMatch[1]) {
-              foundImages.push(singleImgMatch[1].trim());
-            }
+            allMatches.forEach(m => {
+              let imgPath = m[1].trim().replace(/^['"]|['"]$/g, ''); // 따옴표 제거
+              // metadata 필드명이 아닌 실제 파일명만 필터
+              if (imgPath && !imgPath.includes('\n')) {
+                // "photo: gallery/abc.jpg" 형태에서 순수 경로만 분리
+                if (imgPath.includes(':')) {
+                  imgPath = imgPath.split(':').pop().trim();
+                }
+                if (!foundImages.includes(imgPath)) {
+                  foundImages.push(imgPath);
+                }
+              }
+            });
 
-            // 개별 사진마다 카드로 생성 (경로 정규화)
+            // 개별 사진 카드로 등록
             foundImages.forEach(img => {
-              const cleanImg = img.replace(/^\/?(gallery\/)?/, '');
+              let cleanImg = img.replace(/^\/?(gallery\/)?/, '');
               loaded.push({
                 title,
                 category,
@@ -1271,6 +1281,18 @@
             });
           }
         }
+
+        if (loaded.length > 0) {
+          // 날짜 기준 최신순 정렬
+          loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+          allGalleryAlbums = loaded; // 관리자에서 올린 사진으로 화면 채움
+        }
+        renderFilteredGallery();
+      } catch (err) {
+        console.error("갤러리 파싱 에러:", err);
+        renderFilteredGallery();
+      }
+    }
 
         if (loaded.length > 0) {
           // 최신순 정렬 후 기본 예시 앞에 배치
