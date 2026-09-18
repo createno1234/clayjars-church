@@ -7,5 +7,33 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+  <script>
+    // Netlify 팝업 호출을 차단하고 개인 토큰 입력창을 띄웁니다
+    CMS.registerBackend('github', CMS.getBackend('github'));
+    if (!localStorage.getItem('decap-cms-user')) {
+      const existingToken = localStorage.getItem('netlify-cms-user');
+      if (!existingToken) {
+        window.addEventListener('load', () => {
+          const btn = document.querySelector('button');
+          if (btn) {
+            btn.onclick = (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const token = prompt("GitHub 개인 액세스 토큰(ghp_...)을 입력하세요:");
+              if (token && token.trim()) {
+                const userData = {
+                  backendName: "github",
+                  token: token.trim()
+                };
+                localStorage.setItem("decap-cms-user", JSON.stringify(userData));
+                localStorage.setItem("netlify-cms-user", JSON.stringify(userData));
+                window.location.reload();
+              }
+            };
+          }
+        });
+      }
+    }
+  </script>
 </body>
 </html>
