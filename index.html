@@ -1294,17 +1294,6 @@
       }
     }
 
-        if (loaded.length > 0) {
-          // 최신순 정렬 후 기본 예시 앞에 배치
-          loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-          allGalleryAlbums = [...loaded, ...allGalleryAlbums];
-        }
-        renderFilteredGallery();
-      } catch (err) {
-        renderFilteredGallery();
-      }
-    }
-
     function filterGallery(category) {
       currentSelectedCategory = category;
       
