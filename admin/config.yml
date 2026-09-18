@@ -24,9 +24,9 @@ collections:
         options: ["수련회/리트릿", "주일예배", "행사/친교", "빚음부(교회학교)"]
         default: "행사/친교"
       - { label: "촬영 일자", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
-      - label: "앨범 사진들 (여러 장 등록 가능)"
+      - label: "앨범 사진 등록 (여러 장 추가)"
         name: "photos"
         widget: "list"
         summary: "{{fields.photo}}"
-        field: { label: "사진 선택", name: "photo", widget: "image" }
+        field: { label: "사진 선택", name: "photo", widget: "image", choose_url: false }
       - { label: "간단한 설명", name: "description", widget: "text", required: false }
