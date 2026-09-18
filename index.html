@@ -1240,16 +1240,33 @@
             const titleMatch = raw.match(/title:\s*["']?(.*?)["']?$/m);
             const catMatch = raw.match(/category:\s*["']?(.*?)["']?$/m);
             const dateMatch = raw.match(/date:\s*["']?(.*?)["']?$/m);
-            const imgMatch = raw.match(/image:\s*["']?(.*?)["']?$/m);
             const descMatch = raw.match(/description:\s*["']?(.*?)["']?$/m);
 
-            if (imgMatch && imgMatch[1]) {
+            const title = titleMatch ? titleMatch[1] : '교회 앨범';
+            const category = catMatch ? catMatch[1] : '행사/친교';
+            const date = dateMatch ? dateMatch[1] : '';
+            const desc = descMatch ? descMatch[1] : '';
+
+            // 1. 여러 장의 사진(photos list) 추출
+            const photoMatches = [...raw.matchAll(/-\s*["']?(.*?\.(?:jpg|jpeg|png|webp|gif))["']?/gi)];
+            
+            // 2. 단일 사진(image) 추출 (구형 호환용)
+            const singleImgMatch = raw.match(/image:\s*["']?(.*?)["']?$/m);
+
+            if (photoMatches.length > 0) {
+              photoMatches.forEach(m => {
+                const cleaned = m[1].replace(/^\/?/, '');
+                if (cleaned) {
+                  loaded.push({ title, category, date, file: cleaned, desc });
+                }
+              });
+            } else if (singleImgMatch && singleImgMatch[1]) {
               loaded.push({
-                title: titleMatch ? titleMatch[1] : '교회 앨범',
-                category: catMatch ? catMatch[1] : '수련회/리트릿',
-                date: dateMatch ? dateMatch[1] : '',
-                file: imgMatch[1].replace(/^\/?/, ''),
-                desc: descMatch ? descMatch[1] : ''
+                title,
+                category,
+                date,
+                file: singleImgMatch[1].replace(/^\/?/, ''),
+                desc
               });
             }
           }
