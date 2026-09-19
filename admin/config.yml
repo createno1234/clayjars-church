@@ -2,7 +2,7 @@ backend:
   name: github
   repo: createno1234/clayjars-church
   branch: main
-  base_url: https://createno1234.github.io
+  base_url: https://clayjars-church.kr
   auth_endpoint: ""
 
 media_folder: "gallery"
